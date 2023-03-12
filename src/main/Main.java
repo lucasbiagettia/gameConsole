@@ -18,7 +18,7 @@ public class Main {
 		// 5- Recibir resultados
 		Score score = playable.getScore();
 		// 6- Mostrar resultados y persistirlos en orden
-		showResultsAndPersist();
+		showResultsAndPersist(score);
 		// 7- Repeat.
 		askForAnotherRound();
 		
@@ -31,7 +31,7 @@ public class Main {
 		
 	}
 
-	private static void showResultsAndPersist() {
+	private static void showResultsAndPersist(Score score) {
 		// TODO Auto-generated method stub
 		
 	}

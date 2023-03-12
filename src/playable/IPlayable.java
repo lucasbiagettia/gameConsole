@@ -2,12 +2,18 @@ package playable;
 
 import java.io.Serializable;
 
-public interface IPlayable extends Serializable{
+public interface IPlayable extends Serializable {
 
 	Configurations getConfigurations();
 
-	void play();
-
 	Score getScore();
 
+	Pixel[][] getBitMap();
+	
+	boolean isFinished();
+
+	void play();
+
+	void sendEvent(KeyEvent keyEvent);
+	
 }

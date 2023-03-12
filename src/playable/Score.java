@@ -8,6 +8,11 @@ public class Score implements Serializable {
 	Optional<String> userName;
 	Integer score;
 
+	public Score(Optional<String> theUserName, Integer theScore) {
+		userName = theUserName;
+		score = theScore;
+	}
+
 	public Optional<String> getUserName() {
 		return userName;
 	}
