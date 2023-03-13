@@ -1,10 +1,8 @@
 package playable;
 
-public enum KeyEvent {
+public enum MyKeyEvent {
 	UP,
 	DOWN,
 	LEFT,
 	RIGHT,
-	FINISH
-
 }

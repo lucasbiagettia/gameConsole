@@ -8,17 +8,21 @@ public class MazeGenerator {
 
 	private Stack<Node> stack = new Stack<>();
 	private Random rand = new Random();
+	private boolean defalut = true;
 
-	public MazeGenerator() {}
+	public MazeGenerator() {
+	}
 
 	public Block[][] generateNewMaze(int theColumns, int theRows) {
+		if (defalut) {
+			return getDefaultMap();
+		}
 		Block[][] maze = new Block[theColumns][theRows];
 		stack.push(new Node(0, 0));
 		while (!stack.empty()) {
 			Node next = stack.pop();
 			if (validNextNode(next, maze, theColumns, theRows)) {
 				maze[next.y][next.x] = Block.WALL;
-
 				ArrayList<Node> neighbors = findNeighbors(next, theColumns, theRows);
 				randomlyAddNodesToStack(neighbors);
 			}
@@ -26,12 +30,43 @@ public class MazeGenerator {
 		return maze;
 	}
 
+	private Block[][] getDefaultMap() {
+		Block[][] defaultMap = {
+				{ Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL,
+						Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL },
+				{ Block.WALL, Block.FREE, Block.FREE, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL,
+						Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL },
+				{ Block.WALL, Block.FREE, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL,
+						Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL },
+				{ Block.WALL, Block.FREE, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL,
+						Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL },
+				{ Block.WALL, Block.FREE, Block.FREE, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL,
+						Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL },
+				{ Block.WALL, Block.WALL, Block.FREE, Block.FREE, Block.FREE, Block.WALL, Block.WALL, Block.WALL,
+						Block.WALL, Block.WALL, Block.FREE, Block.FREE, Block.FREE, Block.FREE, Block.WALL },
+				{ Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.FREE, Block.WALL, Block.WALL, Block.WALL,
+						Block.WALL, Block.WALL, Block.FREE, Block.WALL, Block.FREE, Block.WALL, Block.WALL },
+				{ Block.WALL, Block.FREE, Block.FREE, Block.FREE, Block.FREE, Block.WALL, Block.FREE, Block.FREE,
+						Block.FREE, Block.WALL, Block.FREE, Block.WALL, Block.FREE, Block.WALL, Block.WALL },
+				{ Block.WALL, Block.FREE, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.FREE, Block.WALL,
+						Block.FREE, Block.WALL, Block.FREE, Block.WALL, Block.FREE, Block.WALL, Block.WALL },
+				{ Block.WALL, Block.FREE, Block.FREE, Block.FREE, Block.FREE, Block.FREE, Block.FREE, Block.WALL,
+						Block.FREE, Block.FREE, Block.FREE, Block.WALL, Block.FREE, Block.FREE, Block.FREE },
+				{ Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL,
+						Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL }, };
+
+		return defaultMap;
+	}
+
 	private boolean validNextNode(Node node, Block[][] maze, int columns, int rows) {
 		int numNeighboringOnes = 0;
 		for (int y = node.y - 1; y < node.y + 2; y++) {
 			for (int x = node.x - 1; x < node.x + 2; x++) {
-				if (pointOnGrid(x, y, columns, rows) && pointNotNode(node, x, y) && maze[y][x] == Block.WALL) {
-					numNeighboringOnes++;
+				try {
+					if (pointOnGrid(x, y, columns, rows) && pointNotNode(node, x, y) && maze[y][x] == Block.WALL) {
+						numNeighboringOnes++;
+					}
+				} catch (Exception e) {
 				}
 			}
 		}

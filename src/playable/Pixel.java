@@ -9,5 +9,11 @@ public class Pixel {
 		shape = theShape;
 		color = theColor;
 	}
+	public Shape getShape() {
+		return shape;
+	}
+	public Color getColor() {
+		return color;
+	}
 	
 }

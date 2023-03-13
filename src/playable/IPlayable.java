@@ -14,6 +14,6 @@ public interface IPlayable extends Serializable {
 
 	void play();
 
-	void sendEvent(KeyEvent keyEvent);
+	void receiveEvent(MyKeyEvent keyEvent);
 	
 }
