@@ -1,6 +1,7 @@
 package games.maze.commons;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.Optional;
 
 import games.maze.maze_generator.Block;
@@ -13,27 +14,28 @@ import playable.Score;
 import playable.Shape;
 
 public class MazeGame implements IPlayable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7109304115764548778L;
 	private MazeGenerator mazeGenerator;
 	private Block[][] maze;
 	private Position characterPosition;
 	private final Position mapExit;
 	private Integer movements;
 	private final Configurations configurations;
-	private boolean isPlaying;
-	private boolean isFinished;
+	private boolean playing;
+	private boolean finished;
 
 	public MazeGame() {
 		mazeGenerator = new MazeGenerator();
 		configurations = new Configurations("maze game", Optional.empty(), 11, 15);
 		maze = mazeGenerator.generateNewMaze(configurations.getScreenWidht(), configurations.getScreenHeight());
 		movements = 0;
-		isPlaying = false;
+		playing = false;
+		finished = false;
 		characterPosition = new Position(0, 1);
 		mapExit = new Position(configurations.getScreenWidht() - 1, configurations.getScreenHeight() - 2);
-	}
-
-	public void paintMaze() {
-
 	}
 
 	@Override
@@ -43,12 +45,12 @@ public class MazeGame implements IPlayable {
 
 	@Override
 	public void play() {
-		isPlaying = true;
+		playing = true;
 	}
 
 	@Override
 	public Score getScore() {
-		return new Score(Optional.empty(), movements);
+		return new Score(Optional.empty(), 1000 - movements);
 	}
 
 	@Override
@@ -77,13 +79,12 @@ public class MazeGame implements IPlayable {
 
 	@Override
 	public boolean isFinished() {
-		// TODO Auto-generated method stub
-		return false;
+		return finished;
 	}
 
 	@Override
 	public synchronized void receiveEvent(MyKeyEvent keyEvent) {
-		if (!isPlaying) {
+		if (!playing) {
 			return;
 		}
 		Position potentialPosition = null;
@@ -102,18 +103,19 @@ public class MazeGame implements IPlayable {
 			break;
 		}
 		if (checkWin(potentialPosition)) {
-			win();
 			characterPosition = potentialPosition;
+			movements +=10;
+			win();
 		}
-		boolean possible = checkPossible(potentialPosition);
-		if (possible) {
+		if (checkPossible(potentialPosition)) {
+			movements +=10;
 			characterPosition = potentialPosition;
 		}
 	}
 
 	private void win() {
-		isPlaying = false;
-		isFinished = true;
+		playing = false;
+		finished = true;
 	}
 
 	private boolean checkWin(Position potentialPosition) {
@@ -133,5 +135,8 @@ public class MazeGame implements IPlayable {
 			return false;
 		}
 	}
+
+	@Override
+	public void close() throws IOException {}
 
 }

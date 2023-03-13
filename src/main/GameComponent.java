@@ -2,14 +2,11 @@ package main;
 
 import java.awt.Component;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import playable.IPlayable;
-import playable.MyKeyEvent;
 import playable.Pixel;
 
-public class GameComponent extends Component implements KeyListener{
+public class GameComponent extends Component {
 	private static final long serialVersionUID = -4728059692875211727L;
 	IPlayable playable;
 
@@ -34,30 +31,4 @@ public class GameComponent extends Component implements KeyListener{
 			}
 		}
 	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		switch (e.getKeyCode()) {
-		case 38:
-			playable.receiveEvent(MyKeyEvent.UP);
-			break;
-		case 37:
-			playable.receiveEvent(MyKeyEvent.LEFT);
-			break;
-		case 40:
-			playable.receiveEvent(MyKeyEvent.DOWN);
-			break;
-		case 39:
-			playable.receiveEvent(MyKeyEvent.RIGHT);
-			break;
-		}
-		repaint();
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {}
-
 }
