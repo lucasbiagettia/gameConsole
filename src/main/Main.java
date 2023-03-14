@@ -48,13 +48,7 @@ public class Main {
 	}
 
 	private static IPlayable selectGame() {
-		try {
-			return new SocketClientPlayable();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		return new MazeGame();
 	}
 
 }

@@ -109,7 +109,7 @@ public class FakeServer implements Runnable {
 						playable.play();
 						break;
 					case RECEIVE_EVENT:
-						MyKeyEvent myKeyEvent = ((Request) readObject).getKeyEvent().get();
+						MyKeyEvent myKeyEvent = ((Request) readObject).keyEvent;
 						playable.receiveEvent(myKeyEvent);
 						break;
 					default:
@@ -119,7 +119,6 @@ public class FakeServer implements Runnable {
 				}
 			} catch (Exception e) {
 			}
-
 		}
 	}
 }

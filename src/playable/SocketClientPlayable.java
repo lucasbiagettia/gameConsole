@@ -20,7 +20,6 @@ public class SocketClientPlayable implements IPlayable {
 	Object lock = new Object();
 
 	public SocketClientPlayable() throws IOException {
-		initializeServer(port);
 		try {
 			tryInitializeSocket();
 		} catch (IOException e) {
@@ -36,11 +35,6 @@ public class SocketClientPlayable implements IPlayable {
 		objectOutputStream = new ObjectOutputStream(outputStream);
 		inputStream = socket.getInputStream();
 		objectInputStream = new ObjectInputStream(inputStream);
-	}
-
-	private void initializeServer(int port) {
-		new FakeServer(port);
-		// Por ahora ejecutamos un Java.
 	}
 
 	@Override
@@ -140,8 +134,8 @@ public class SocketClientPlayable implements IPlayable {
 	public void receiveEvent(MyKeyEvent keyEvent) throws IOException {
 		synchronized (lock) {
 			Request req = Request.RECEIVE_EVENT;
-			req.setKeyEvent(Optional.of(keyEvent));
+			req.keyEvent = keyEvent;
 			objectOutputStream.writeObject(req);
-		}	
+		}
 	}
 }

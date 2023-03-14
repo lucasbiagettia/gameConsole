@@ -6,5 +6,6 @@ public enum MyKeyEvent implements Serializable {
 	UP,
 	DOWN,
 	LEFT,
-	RIGHT,
+	RIGHT;
+	private static final long serialVersionUID = 374010913671691L;
 }

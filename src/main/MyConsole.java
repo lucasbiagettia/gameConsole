@@ -68,9 +68,9 @@ public class MyConsole implements KeyListener, Closeable {
 			}
 
 				if (autoRefresh == 0) {
-					askIsFinished();
+//					askIsFinished();
 				}
-		} catch (IOException | ClassNotFoundException e1) {
+		} catch (IOException e1) {
 		}
 	}
 
