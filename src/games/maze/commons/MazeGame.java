@@ -29,7 +29,7 @@ public class MazeGame implements IPlayable {
 
 	public MazeGame() {
 		mazeGenerator = new MazeGenerator();
-		configurations = new Configurations("maze game", Optional.empty(), 11, 15);
+		configurations = new Configurations("maze game", 0 , 11, 15);
 		maze = mazeGenerator.generateNewMaze(configurations.getScreenWidht(), configurations.getScreenHeight());
 		movements = 0;
 		playing = false;
@@ -50,7 +50,7 @@ public class MazeGame implements IPlayable {
 
 	@Override
 	public Score getScore() {
-		return new Score(Optional.empty(), 1000 - movements);
+		return new Score("", 1000 - movements);
 	}
 
 	@Override

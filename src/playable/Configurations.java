@@ -6,11 +6,11 @@ import java.util.Optional;
 public class Configurations implements Serializable {
 	private static final long serialVersionUID = 3740109136716918811L;
 	private final String name;
-	private final Optional<Integer> autoRefresh;
+	private final Integer autoRefresh;
 	private final Integer screenWidht;
 	private final Integer screenHeight;
 
-	public Configurations(String theName, Optional<Integer> theAutoRefresh, Integer theScreenWidht, Integer theScreenHeight) {
+	public Configurations(String theName, Integer theAutoRefresh, Integer theScreenWidht, Integer theScreenHeight) {
 		name = theName;
 		autoRefresh = theAutoRefresh;
 		screenWidht = theScreenWidht;
@@ -21,7 +21,7 @@ public class Configurations implements Serializable {
 		return name;
 	}
 
-	public Optional<Integer> getAutoRefresh() {
+	public Integer getAutoRefresh() {
 		return autoRefresh;
 	}
 

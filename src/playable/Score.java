@@ -5,15 +5,15 @@ import java.util.Optional;
 
 public class Score implements Serializable {
 	private static final long serialVersionUID = 800058354218508918L;
-	Optional<String> userName;
+	String userName;
 	Integer score;
 
-	public Score(Optional<String> theUserName, Integer theScore) {
+	public Score(String theUserName, Integer theScore) {
 		userName = theUserName;
 		score = theScore;
 	}
 
-	public Optional<String> getUserName() {
+	public String getUserName() {
 		return userName;
 	}
 
@@ -21,7 +21,7 @@ public class Score implements Serializable {
 		return score;
 	}
 
-	public void setUserName(Optional<String> theUserName) {
+	public void setUserName(String theUserName) {
 		userName = theUserName;
 	}
 

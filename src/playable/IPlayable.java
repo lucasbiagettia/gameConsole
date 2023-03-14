@@ -1,20 +1,21 @@
 package playable;
 
 import java.io.Closeable;
+import java.io.IOException;
 import java.io.Serializable;
 
 public interface IPlayable extends Serializable, Closeable {
 
-	Configurations getConfigurations();
+	Configurations getConfigurations() throws IOException, ClassNotFoundException;
 
-	Score getScore();
+	Score getScore() throws IOException, ClassNotFoundException;
 
-	Pixel[][] getBitMap();
-	
-	boolean isFinished();
+	Pixel[][] getBitMap() throws IOException, ClassNotFoundException;
 
-	void play();
+	boolean isFinished() throws IOException, ClassNotFoundException;
 
-	void receiveEvent(MyKeyEvent keyEvent);
-	
+	void play() throws IOException;
+
+	void receiveEvent(MyKeyEvent keyEvent) throws IOException;
+
 }

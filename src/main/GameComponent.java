@@ -2,6 +2,7 @@ package main;
 
 import java.awt.Component;
 import java.awt.Graphics;
+import java.io.IOException;
 
 import playable.IPlayable;
 import playable.Pixel;
@@ -16,19 +17,25 @@ public class GameComponent extends Component {
 
 	@Override
 	public void paint(Graphics graphics) {
-		Pixel[][] pixels = playable.getBitMap();
-		for (int i = 0; i < pixels.length; i++) {
-			for (int j = 0; j < pixels[0].length; j++) {
-				graphics.setColor(pixels[i][j].getColor());
-				switch (pixels[i][j].getShape()) {
-				case SQUARE:
-					graphics.fillRect(i * 40, j * 40, 40, 40);
-					break;
-				case CIRCLE:
-					graphics.fillOval(i * 40, j * 40, 40, 40);
-					break;
+		Pixel[][] pixels;
+		try {
+			pixels = playable.getBitMap();
+
+			for (int i = 0; i < pixels.length; i++) {
+				for (int j = 0; j < pixels[0].length; j++) {
+					graphics.setColor(pixels[i][j].getColor());
+					switch (pixels[i][j].getShape()) {
+					case SQUARE:
+						graphics.fillRect(i * 40, j * 40, 40, 40);
+						break;
+					case CIRCLE:
+						graphics.fillOval(i * 40, j * 40, 40, 40);
+						break;
+					}
 				}
 			}
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

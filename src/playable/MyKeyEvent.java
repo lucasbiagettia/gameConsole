@@ -1,6 +1,8 @@
 package playable;
 
-public enum MyKeyEvent {
+import java.io.Serializable;
+
+public enum MyKeyEvent implements Serializable {
 	UP,
 	DOWN,
 	LEFT,
