@@ -1,4 +1,4 @@
-package main;
+package user_interface;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import javax.swing.JFrame;
 
+import main.ScoreManager;
 import playable.Configurations;
 import playable.IPlayable;
 import playable.MyKeyEvent;
@@ -41,10 +42,6 @@ public class MyConsole implements KeyListener, Closeable {
 		playable.play();
 	}
 
-	public void finish() {
-
-	}
-
 	@Override
 	public void keyTyped(KeyEvent e) {
 	}
@@ -67,16 +64,20 @@ public class MyConsole implements KeyListener, Closeable {
 				break;
 			}
 
-				if (autoRefresh == 0) {
-//					askIsFinished();
-				}
-		} catch (IOException e1) {
+			if (autoRefresh == 0) {
+				askIsFinished();
+			}
+		} catch (IOException | ClassNotFoundException e1) {
+			e1.printStackTrace();
 		}
 	}
 
 	private void askIsFinished() throws ClassNotFoundException, IOException {
 		if (playable.isFinished()) {
-			getResults();
+			gameWindow.dispose();
+			ScoreManager scoreManager = ScoreManager.getInstance();
+			scoreManager.addScore(playable.getScore());
+
 		} else {
 			gameWindow.repaint();
 		}

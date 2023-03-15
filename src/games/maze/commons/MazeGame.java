@@ -2,7 +2,6 @@ package games.maze.commons;
 
 import java.awt.Color;
 import java.io.IOException;
-import java.util.Optional;
 
 import games.maze.maze_generator.Block;
 import games.maze.maze_generator.MazeGenerator;

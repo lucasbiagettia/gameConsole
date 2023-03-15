@@ -1,9 +1,8 @@
 package playable;
 
 import java.io.Serializable;
-import java.util.Optional;
 
-public class Score implements Serializable {
+public class Score implements Serializable, Comparable<Score> {
 	private static final long serialVersionUID = 800058354218508918L;
 	String userName;
 	Integer score;
@@ -28,4 +27,9 @@ public class Score implements Serializable {
 	public void setScore(Integer theScore) {
 		score = theScore;
 	}
+	
+	@Override
+    public int compareTo(Score otroScore) {
+        return this.score.compareTo(otroScore.getScore());
+    }
 }

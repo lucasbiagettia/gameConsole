@@ -1,13 +1,15 @@
 package main;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
+
+import connection.SocketClientPlayable;
 import games.maze.commons.MazeGame;
-import playable.Configurations;
 import playable.IPlayable;
-import playable.Score;
-import playable.SocketClientPlayable;
+import user_interface.FirstWindow;
+import user_interface.MyConsole;
 
 public class Main {
 	private static JFrame gameWindow;
@@ -15,40 +17,31 @@ public class Main {
 
 	public static void main(String[] args) {
 		try {
-			// 1- Seleccionar playable mediante interfaz gráfica
 			IPlayable playable = selectGame();
-			// 2- Pedir configuraciones al playable
 			MyConsole console = new MyConsole(playable);
 			console.start();
-			// 3- Preparar todo con las configuraciones
-			// 4- Jugar
-			// 5- Recibir resultados
-			Score score;
-			score = playable.getScore();
-			// 6- Mostrar resultados y persistirlos en orden
-			showResultsAndPersist(score);
-			// 7- Repeat.
-			askForAnotherRound();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		// TODO Auto-generated method stub
-
-	}
-
-	private static void askForAnotherRound() {
-		// TODO Auto-generated method stub
-
-	}
-
-	private static void showResultsAndPersist(Score score) {
-		// TODO Auto-generated method stub
-
 	}
 
 	private static IPlayable selectGame() {
-		return new MazeGame();
-	}
+		FirstWindow firstWindow = new FirstWindow("Por favor seleccione un Juego o Archivo");
+		firstWindow.setVisible(true);
 
+		while (true) {
+			if (firstWindow.getMazeGameSelected()) {
+				firstWindow.dispose();
+				return new MazeGame();
+			}
+			if (firstWindow.getFile() != null) {
+				firstWindow.dispose();
+				try {
+					return new SocketClientPlayable(firstWindow.getFile());
+				} catch (IOException e) {
+					return selectGame();
+				}
+			}
+		}
+	}
 }

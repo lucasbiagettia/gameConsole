@@ -1,7 +1,6 @@
 package playable;
 
 import java.io.Serializable;
-import java.util.Optional;
 
 public class Configurations implements Serializable {
 	private static final long serialVersionUID = 3740109136716918811L;

@@ -1,14 +1,20 @@
-package playable;
+package connection;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.util.Optional;
 
-import server.FakeServer;
+import playable.Configurations;
+import playable.IPlayable;
+import playable.MyKeyEvent;
+import playable.Pixel;
+import playable.Request;
+import playable.Score;
+
 
 public class SocketClientPlayable implements IPlayable {
 	private int port = 5555;
@@ -19,7 +25,14 @@ public class SocketClientPlayable implements IPlayable {
 	ObjectInputStream objectInputStream;
 	Object lock = new Object();
 
-	public SocketClientPlayable() throws IOException {
+	public SocketClientPlayable(File file) throws IOException {
+		JarExecutor jarExecutor = new JarExecutor (file);
+		jarExecutor.execute();
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e1) {
+		}
+		
 		try {
 			tryInitializeSocket();
 		} catch (IOException e) {
@@ -133,9 +146,7 @@ public class SocketClientPlayable implements IPlayable {
 	@Override
 	public void receiveEvent(MyKeyEvent keyEvent) throws IOException {
 		synchronized (lock) {
-			Request req = Request.RECEIVE_EVENT;
-			req.keyEvent = keyEvent;
-			objectOutputStream.writeObject(req);
+			objectOutputStream.writeObject(keyEvent);
 		}
 	}
 }
