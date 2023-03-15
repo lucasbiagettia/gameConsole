@@ -2,7 +2,6 @@ package main;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -11,8 +10,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import user_interface.FinalWindow;
-import user_interface.UsernameWindow;
 
 public class ScoreManager {
 
@@ -29,26 +30,25 @@ public class ScoreManager {
 	}
 
 	public void addScore(int points, String name) {
-		UsernameWindow usernameWindow = new UsernameWindow();
-		while (!usernameWindow.getComplete()) {
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				
-			}
-		}
-		String username = usernameWindow.getName();
+		String username = askName();
 		Score score = new Score(username, points);
-		
-		name.replace(" ","").replace(".", "").replace(" ", "");
-		File file = new File (name + "scores.dat");
+
+		name.replace(" ", "").replace(".", "").replace(" ", "");
+		File file = new File(name + "scores.dat");
 		List<Score> scores = getPersistedScores(file);
 		scores.add(score);
 		FinalWindow finalWindow = new FinalWindow(score, scores);
 		finalWindow.setVisible(true);
 		Collections.sort(scores);
-		persistScores(scores,file);
+		persistScores(scores, file);
 
+	}
+
+	private String askName() {
+		String userName = "";
+		userName = JOptionPane.showInputDialog(null, "Introduce tu nombre de usuario:", "Nombre de usuario",
+				JOptionPane.PLAIN_MESSAGE);
+		return userName;
 	}
 
 	private void persistScores(List<Score> scores, File file) {

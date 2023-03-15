@@ -30,7 +30,7 @@ public class MyConsole implements KeyListener, Closeable {
 		gameComponent = new GameComponent(playable);
 		autoRefresh = configurations.getAutoRefresh();
 		gameWindow = new JFrame(configurations.getName());
-		gameWindow.setSize(configurations.getScreenWidht() * 40, (configurations.getScreenHeight() + 1) * 40);
+		gameWindow.setSize((configurations.getScreenWidht()+1) * 40, (configurations.getScreenHeight() + 2) * 40);
 		gameWindow.setLocation(300, 200);
 		gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameWindow.addKeyListener(this);

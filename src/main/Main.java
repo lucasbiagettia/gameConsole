@@ -1,9 +1,8 @@
 package main;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import connection.SocketClientPlayable;
 import games.maze.commons.MazeGame;
@@ -12,7 +11,6 @@ import user_interface.FirstWindow;
 import user_interface.MyConsole;
 
 public class Main {
-	private static JFrame gameWindow;
 	private static IPlayable playable;
 
 	public static void main(String[] args) {
