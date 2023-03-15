@@ -8,7 +8,6 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-import main.Score;
 import playable.Configurations;
 import playable.IPlayable;
 import playable.MyKeyEvent;

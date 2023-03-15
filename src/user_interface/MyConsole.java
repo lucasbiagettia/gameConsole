@@ -4,11 +4,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.Closeable;
 import java.io.IOException;
-import java.util.Optional;
 
 import javax.swing.JFrame;
 
-import main.Score;
 import main.ScoreManager;
 import playable.Configurations;
 import playable.IPlayable;

@@ -2,8 +2,6 @@ package main;
 
 import java.io.IOException;
 
-import javax.swing.JOptionPane;
-
 import connection.SocketClientPlayable;
 import games.maze.commons.MazeGame;
 import playable.IPlayable;
@@ -11,13 +9,12 @@ import user_interface.FirstWindow;
 import user_interface.MyConsole;
 
 public class Main {
-	private static IPlayable playable;
-
 	public static void main(String[] args) {
 		try {
 			IPlayable playable = selectGame();
-			MyConsole console = new MyConsole(playable);
-			console.start();
+			try (MyConsole console = new MyConsole(playable)) {
+				console.start();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

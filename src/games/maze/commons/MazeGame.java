@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import games.maze.maze_generator.Block;
 import games.maze.maze_generator.MazeGenerator;
-import main.Score;
 import playable.Configurations;
 import playable.IPlayable;
 import playable.MyKeyEvent;
