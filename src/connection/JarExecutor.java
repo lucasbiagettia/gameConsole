@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class JarExecutor {
+public class JarExecutor implements Runnable {
 
 	File file;
 
@@ -13,17 +13,18 @@ public class JarExecutor {
 
 	}
 
-	public void execute() {
+	@Override
+	public void run() {
 		String path = file.getAbsolutePath();
 
 		String comando = "java -jar " + path;
 
 		try {
 			ProcessBuilder builder = new ProcessBuilder(Arrays.asList(comando.split(" ")));
-			Process proceso = builder.start();
-			proceso.waitFor();
+			builder.start();
+//			proceso.waitFor();
 
-		} catch (IOException | InterruptedException e) {
+		} catch (IOException  e) {
 			e.printStackTrace();
 		}
 	}

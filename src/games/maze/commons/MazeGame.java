@@ -5,11 +5,11 @@ import java.io.IOException;
 
 import games.maze.maze_generator.Block;
 import games.maze.maze_generator.MazeGenerator;
+import main.Score;
 import playable.Configurations;
 import playable.IPlayable;
 import playable.MyKeyEvent;
 import playable.Pixel;
-import playable.Score;
 import playable.Shape;
 
 public class MazeGame implements IPlayable {
@@ -48,8 +48,9 @@ public class MazeGame implements IPlayable {
 	}
 
 	@Override
-	public Score getScore() {
-		return new Score("", 1000 - movements);
+	public int getScore() {
+					
+		return  1000 - movements;
 	}
 
 	@Override

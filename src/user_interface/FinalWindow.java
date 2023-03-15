@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.Main;
-import playable.Score;
+import main.Score;
 
 public class FinalWindow extends JFrame implements ActionListener  {
 
@@ -24,7 +24,7 @@ public class FinalWindow extends JFrame implements ActionListener  {
 	JButton exitButton = new JButton("Exit");
     JButton replayButton = new JButton("Replay");
 
-	public FinalWindow(Score score, List<Score> scores) {
+    public FinalWindow(Score score, List<Score> scores) {
         super("Finalización del juego");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,13 +40,15 @@ public class FinalWindow extends JFrame implements ActionListener  {
         etiquetaUsuarios.setFont(new Font("Arial", Font.BOLD, 16));
         etiquetaUsuarios.setHorizontalAlignment(JLabel.CENTER);
         
+        exitButton = new JButton("Exit");
+        replayButton = new JButton("Replay");
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(exitButton);
         buttonPanel.add(replayButton);
         exitButton.addActionListener(this);
         replayButton.addActionListener(this);
 
-        getContentPane().add(buttonPanel);
+        getContentPane().add(buttonPanel, BorderLayout.SOUTH);
         
         int grid = 5;
         if (scores.size() <5) {
@@ -55,7 +57,7 @@ public class FinalWindow extends JFrame implements ActionListener  {
         JPanel panelUsuarios = new JPanel(new GridLayout(grid, 2));
         for (int i = 0; i < scores.size() && i <5 ; i++) {
             JLabel userLabel = new JLabel(scores.get(i).getUserName());
-            JLabel scoreIntLabel = new JLabel(String.valueOf(scores.get(i).getScore().toString()));
+            JLabel scoreIntLabel = new JLabel(String.valueOf(scores.get(i).getScore()));
             panelUsuarios.add(userLabel);
             panelUsuarios.add(scoreIntLabel);
         }
@@ -65,7 +67,7 @@ public class FinalWindow extends JFrame implements ActionListener  {
         panelPrincipal.add(etiquetaUsuarios, BorderLayout.CENTER);
         panelPrincipal.add(panelUsuarios, BorderLayout.SOUTH);
 
-        getContentPane().add(panelPrincipal);
+        getContentPane().add(panelPrincipal, BorderLayout.CENTER);
     }
 
 	@Override

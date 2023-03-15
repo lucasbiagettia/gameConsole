@@ -11,11 +11,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import playable.Score;
 import user_interface.FinalWindow;
+import user_interface.UsernameWindow;
 
 public class ScoreManager {
-	File file = new File("scores.dat");
 
 	private static ScoreManager instance = null;
 
@@ -29,17 +28,30 @@ public class ScoreManager {
 		return instance;
 	}
 
-	public void addScore(Score score) {
-		List<Score> scores = getPersistedScores();
+	public void addScore(int points, String name) {
+		UsernameWindow usernameWindow = new UsernameWindow();
+		while (!usernameWindow.getComplete()) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				
+			}
+		}
+		String username = usernameWindow.getName();
+		Score score = new Score(username, points);
+		
+		name.replace(" ","").replace(".", "").replace(" ", "");
+		File file = new File (name + "scores.dat");
+		List<Score> scores = getPersistedScores(file);
 		scores.add(score);
 		FinalWindow finalWindow = new FinalWindow(score, scores);
 		finalWindow.setVisible(true);
 		Collections.sort(scores);
-		persistScores(scores);
+		persistScores(scores,file);
 
 	}
 
-	private void persistScores(List<Score> scores) {
+	private void persistScores(List<Score> scores, File file) {
 		try {
 			FileOutputStream fos;
 			fos = new FileOutputStream(file);
@@ -50,7 +62,7 @@ public class ScoreManager {
 		}
 	}
 
-	private List<Score> getPersistedScores() {
+	private List<Score> getPersistedScores(File file) {
 		try {
 			FileInputStream fis = new FileInputStream(file);
 			try (ObjectInputStream ois = new ObjectInputStream(fis)) {

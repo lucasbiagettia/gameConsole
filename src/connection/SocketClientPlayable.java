@@ -8,15 +8,19 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
+import main.Score;
 import playable.Configurations;
 import playable.IPlayable;
 import playable.MyKeyEvent;
 import playable.Pixel;
 import playable.Request;
-import playable.Score;
 
 
 public class SocketClientPlayable implements IPlayable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8318632224608941123L;
 	private int port = 5555;
 	Socket socket;
 	OutputStream outputStream;
@@ -27,7 +31,9 @@ public class SocketClientPlayable implements IPlayable {
 
 	public SocketClientPlayable(File file) throws IOException {
 		JarExecutor jarExecutor = new JarExecutor (file);
-		jarExecutor.execute();
+		Thread thread = new Thread (jarExecutor);
+		thread.run();
+		
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e1) {
@@ -79,13 +85,13 @@ public class SocketClientPlayable implements IPlayable {
 	}
 
 	@Override
-	public Score getScore() throws IOException, ClassNotFoundException {
+	public int getScore() throws IOException, ClassNotFoundException {
 		synchronized (lock) {
 			objectOutputStream.writeObject(Request.GET_SCORE);
 			int timeOut = 5;
 			int counter = 0;
 			Object score = new Object();
-			while (!(score instanceof Score) && counter <= timeOut) {
+			while (!(score instanceof Integer) && counter <= timeOut) {
 				score = objectInputStream.readObject();
 				counter++;
 				try {
@@ -93,7 +99,7 @@ public class SocketClientPlayable implements IPlayable {
 				} catch (InterruptedException e) {
 				}
 			}
-			return (Score) score;
+			return (Integer)score;
 		}
 	}
 

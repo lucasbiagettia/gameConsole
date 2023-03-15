@@ -8,11 +8,11 @@ import java.util.Optional;
 
 import javax.swing.JFrame;
 
+import main.Score;
 import main.ScoreManager;
 import playable.Configurations;
 import playable.IPlayable;
 import playable.MyKeyEvent;
-import playable.Score;
 
 public class MyConsole implements KeyListener, Closeable {
 	private IPlayable playable;
@@ -40,6 +40,30 @@ public class MyConsole implements KeyListener, Closeable {
 	public void start() throws IOException {
 		gameWindow.setVisible(true);
 		playable.play();
+		if (autoRefresh > 0) {
+			Thread thread = new Thread(new AutomaticRepainter(autoRefresh));
+			thread.run();
+		}
+	}
+
+	class AutomaticRepainter implements Runnable {
+		int sleep;
+
+		AutomaticRepainter(int autoRefresh) {
+			sleep = autoRefresh;
+		}
+
+		@Override
+		public void run() {
+			while (true) {
+				gameWindow.repaint();
+				try {
+					Thread.sleep(sleep);
+				} catch (InterruptedException e) {
+				}
+
+			}
+		}
 	}
 
 	@Override
@@ -76,17 +100,11 @@ public class MyConsole implements KeyListener, Closeable {
 		if (playable.isFinished()) {
 			gameWindow.dispose();
 			ScoreManager scoreManager = ScoreManager.getInstance();
-			scoreManager.addScore(playable.getScore());
-
+			scoreManager.addScore(playable.getScore(), playable.getConfigurations().getName());
 		} else {
 			gameWindow.repaint();
 		}
 
-	}
-
-	private void getResults() throws ClassNotFoundException, IOException {
-		Score score = playable.getScore();
-		System.out.println(score.getScore());
 	}
 
 	@Override

@@ -8,7 +8,7 @@ public interface IPlayable extends Serializable, Closeable {
 
 	Configurations getConfigurations() throws IOException, ClassNotFoundException;
 
-	Score getScore() throws IOException, ClassNotFoundException;
+	int getScore() throws IOException, ClassNotFoundException;
 
 	Pixel[][] getBitMap() throws IOException, ClassNotFoundException;
 
