@@ -32,28 +32,17 @@ public class MazeGenerator {
 
 	private Block[][] getDefaultMap() {
 		Block[][] defaultMap = {
-				{ Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL,
-						Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL },
-				{ Block.WALL, Block.FREE, Block.FREE, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL,
-						Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL },
-				{ Block.WALL, Block.FREE, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL,
-						Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL },
-				{ Block.WALL, Block.FREE, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL,
-						Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL },
-				{ Block.WALL, Block.FREE, Block.FREE, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL,
-						Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL },
-				{ Block.WALL, Block.WALL, Block.FREE, Block.FREE, Block.FREE, Block.WALL, Block.WALL, Block.WALL,
-						Block.WALL, Block.WALL, Block.FREE, Block.FREE, Block.FREE, Block.FREE, Block.WALL },
-				{ Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.FREE, Block.WALL, Block.WALL, Block.WALL,
-						Block.WALL, Block.WALL, Block.FREE, Block.WALL, Block.FREE, Block.WALL, Block.WALL },
-				{ Block.WALL, Block.FREE, Block.FREE, Block.FREE, Block.FREE, Block.WALL, Block.FREE, Block.FREE,
-						Block.FREE, Block.WALL, Block.FREE, Block.WALL, Block.FREE, Block.WALL, Block.WALL },
-				{ Block.WALL, Block.FREE, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.FREE, Block.WALL,
-						Block.FREE, Block.WALL, Block.FREE, Block.WALL, Block.FREE, Block.WALL, Block.WALL },
-				{ Block.WALL, Block.FREE, Block.FREE, Block.FREE, Block.FREE, Block.FREE, Block.FREE, Block.WALL,
-						Block.FREE, Block.FREE, Block.FREE, Block.WALL, Block.FREE, Block.FREE, Block.FREE },
-				{ Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL,
-						Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL }, };
+				{ Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL,Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL },
+				{ Block.WALL, Block.FREE, Block.FREE, Block.FREE, Block.WALL, Block.FREE, Block.FREE, Block.FREE,Block.WALL, Block.FREE, Block.FREE, Block.FREE, Block.FREE, Block.FREE, Block.WALL },
+				{ Block.WALL, Block.FREE, Block.WALL, Block.FREE, Block.WALL, Block.FREE, Block.WALL, Block.FREE,Block.WALL, Block.WALL, Block.FREE, Block.WALL, Block.FREE, Block.WALL, Block.WALL },
+				{ Block.WALL, Block.FREE, Block.WALL, Block.FREE, Block.FREE, Block.FREE, Block.WALL, Block.FREE,Block.FREE, Block.FREE, Block.FREE, Block.WALL, Block.WALL, Block.WALL, Block.WALL },
+				{ Block.WALL, Block.FREE, Block.FREE, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.FREE,Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL },
+				{ Block.WALL, Block.WALL, Block.FREE, Block.FREE, Block.FREE, Block.WALL, Block.WALL, Block.FREE,Block.FREE, Block.WALL, Block.FREE, Block.FREE, Block.FREE, Block.FREE, Block.WALL },
+				{ Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.FREE, Block.WALL, Block.WALL, Block.FREE,Block.WALL, Block.WALL, Block.FREE, Block.WALL, Block.FREE, Block.WALL, Block.WALL },
+				{ Block.WALL, Block.FREE, Block.FREE, Block.FREE, Block.FREE, Block.WALL, Block.FREE, Block.FREE,Block.FREE, Block.WALL, Block.FREE, Block.WALL, Block.FREE, Block.WALL, Block.WALL },
+				{ Block.WALL, Block.FREE, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.FREE, Block.WALL,Block.FREE, Block.WALL, Block.FREE, Block.WALL, Block.FREE, Block.WALL, Block.WALL },
+				{ Block.WALL, Block.FREE, Block.FREE, Block.FREE, Block.FREE, Block.FREE, Block.FREE, Block.WALL,Block.FREE, Block.FREE, Block.FREE, Block.WALL, Block.FREE, Block.FREE, Block.WALL },
+				{ Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL,Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL, Block.WALL }, };
 
 		return defaultMap;
 	}

@@ -12,9 +12,10 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 			IPlayable playable = selectGame();
-			try (MyConsole console = new MyConsole(playable)) {
-				console.start();
-			}
+			@SuppressWarnings("resource")
+			MyConsole console = new MyConsole(playable);
+			console.start();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -25,6 +26,10 @@ public class Main {
 		firstWindow.setVisible(true);
 
 		while (true) {
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e1) {
+			}
 			if (firstWindow.getMazeGameSelected()) {
 				firstWindow.dispose();
 				return new MazeGame();

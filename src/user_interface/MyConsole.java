@@ -38,6 +38,7 @@ public class MyConsole implements KeyListener, Closeable {
 	public void start() throws IOException {
 		gameWindow.setVisible(true);
 		playable.play();
+
 		if (autoRefresh > 0) {
 			Thread thread = new Thread(new AutomaticRepainter(autoRefresh));
 			thread.run();

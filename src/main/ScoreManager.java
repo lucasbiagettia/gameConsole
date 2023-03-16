@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import user_interface.FinalWindow;
@@ -32,16 +31,14 @@ public class ScoreManager {
 	public void addScore(int points, String name) {
 		String username = askName();
 		Score score = new Score(username, points);
-
-		name.replace(" ", "").replace(".", "").replace(" ", "");
-		File file = new File(name + "scores.dat");
+		String replace = name.replace(" ", "").replace(".", "").replace(" ", "");
+		File file = new File(replace + "scores.dat");
 		List<Score> scores = getPersistedScores(file);
 		scores.add(score);
 		FinalWindow finalWindow = new FinalWindow(score, scores);
 		finalWindow.setVisible(true);
 		Collections.sort(scores);
 		persistScores(scores, file);
-
 	}
 
 	private String askName() {
@@ -55,8 +52,9 @@ public class ScoreManager {
 		try {
 			FileOutputStream fos;
 			fos = new FileOutputStream(file);
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(scores);
+			try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+				oos.writeObject(scores);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -68,6 +66,7 @@ public class ScoreManager {
 			try (ObjectInputStream ois = new ObjectInputStream(fis)) {
 				Object readObject = ois.readObject();
 				if (readObject instanceof List) {
+					@SuppressWarnings("unchecked")
 					List<Score> list = (List<Score>) readObject;
 					return list;
 				} else {
