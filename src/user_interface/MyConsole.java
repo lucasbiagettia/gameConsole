@@ -28,7 +28,7 @@ public class MyConsole implements KeyListener, Closeable {
 		gameComponent = new GameComponent(playable);
 		autoRefresh = configurations.getAutoRefresh();
 		gameWindow = new JFrame(configurations.getName());
-		gameWindow.setSize((configurations.getScreenWidht()+1) * 40, (configurations.getScreenHeight() + 2) * 40);
+		gameWindow.setSize((configurations.getScreenWidht() + 1) * 40, (configurations.getScreenHeight() + 2) * 40);
 		gameWindow.setLocation(300, 200);
 		gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameWindow.addKeyListener(this);
@@ -55,7 +55,12 @@ public class MyConsole implements KeyListener, Closeable {
 		@Override
 		public void run() {
 			while (true) {
-				gameWindow.repaint();
+				try {
+					if(askIsFinished()) {
+						break;
+					}
+				} catch (ClassNotFoundException | IOException e1) {
+				}
 				try {
 					Thread.sleep(sleep);
 				} catch (InterruptedException e) {
@@ -95,14 +100,16 @@ public class MyConsole implements KeyListener, Closeable {
 		}
 	}
 
-	private void askIsFinished() throws ClassNotFoundException, IOException {
-		if (playable.isFinished()) {
+	private boolean askIsFinished() throws ClassNotFoundException, IOException {
+		boolean ret = playable.isFinished();
+		if (ret) {
 			gameWindow.dispose();
 			ScoreManager scoreManager = ScoreManager.getInstance();
 			scoreManager.addScore(playable.getScore(), playable.getConfigurations().getName());
 		} else {
 			gameWindow.repaint();
 		}
+		return ret;
 
 	}
 
